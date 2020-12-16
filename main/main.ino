@@ -85,6 +85,7 @@ unsigned long pre_duration_wait_next_husky = 3000;
 bool manualmode = true;
 unsigned long distance_ikichi = 10.0;
 unsigned long rotate_amount = 1;
+unsigned long rotate_direction = 1;
 unsigned long duration_gps = 1000;
 unsigned long duration_Hs = 20000; //need to adjust
 unsigned long duration_wait_next_husky = 3000;
@@ -151,6 +152,7 @@ void setBlynkDependency(){
   duration_gps = pre_duration_gps * 100;
   duration_Hs = pre_duration_Hs * 100; //need to adjust
   duration_wait_next_husky = pre_duration_wait_next_husky * 100;
+  rotate_direction = pre_rotate_direction;
   Blynk.virtualWrite(V17, rad);
   
 }
@@ -312,16 +314,16 @@ void HUSKYmode(){
   // ターゲットが右側にある時
   if(result.xCenter >= 170){
     Serial.println("RIGHT");
-    servo1.writeMicroseconds(round(1500 - pre_rotate_direction * (result.xCenter-150)*5));
-    servo2.writeMicroseconds(round(1500 - pre_rotate_direction * (result.xCenter-150)*5));
+    servo1.writeMicroseconds(round(1500 - rotate_direction * (result.xCenter-150)*5));
+    servo2.writeMicroseconds(round(1500 - rotate_direction * (result.xCenter-150)*5));
     servo3.writeMicroseconds(1600);
   }
   // ターゲットが左側にある時
   else if(result.xCenter <= 130){
   
     Serial.println("LEFT");
-    servo1.writeMicroseconds(round(1500 - pre_rotate_direction * (result.xCenter-150)*5));
-    servo2.writeMicroseconds(round(1500 - pre_rotate_direction * (result.xCenter-150)*5));
+    servo1.writeMicroseconds(round(1500 - rotate_direction * (result.xCenter-150)*5));
+    servo2.writeMicroseconds(round(1500 - rotate_direction * (result.xCenter-150)*5));
     servo3.writeMicroseconds(1600);
   }
   else{
