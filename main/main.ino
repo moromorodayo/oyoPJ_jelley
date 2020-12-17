@@ -18,9 +18,11 @@ char auth[] = "I3ng7mU0BTlTGSoeXFETFmH201n-gvIf";
 //char ssid[] = "JCOM_MTLU";
 //char pass[] =  "491696085067";
 
-char ssid[] = "iphone@moon";
-char pass[] =  "8fzsp93s04222";
+//char ssid[] = "iphone@moon";
+//char pass[] =  "8fzsp93s04222";
 
+char ssid[] = "803ZTa-04029B";
+char pass[] =  "0129013a";
 
 TinyGPSPlus gps;
 HardwareSerial mySerial2(2);
@@ -165,12 +167,12 @@ BlynkTimer timer3;
 
 int curve1(int x)
 {
-  return 1500 - rotate_amount * round(turnStrength*x);
+  return 1500 - round(turnStrength*x);
 }
 
 int curve2(int x)
 {
-  return 1500 + rotate_amount * round(forwardStrength*x);
+  return 1500 + round(forwardStrength*x);
 }
 
 void servoLoop()
@@ -184,21 +186,19 @@ void servoLoop()
 }
 
 float distance_togoal(float now_lng, float now_lat)
-{
-   float lng_meter, lat_meter;
-   lng_meter = abs((goal_lng * 100.0) - (now_lng * 100.0)) * (912.877885);
-   lat_meter = abs((goal_lat * 100.0) - (now_lat * 100.0)) * (1109.405844);
+{                
+   float lng_meter = abs(goal_lng - now_lng) * (91287.7885);
+   float lat_meter = abs(goal_lat - now_lat) * (110940.5844);
    return sqrt((lng_meter * lng_meter) + (lat_meter * lat_meter));            
 }
 
 double direction_differ(float now_lng, float now_lat,
                         float past_lng, float past_lat)
 {
-  double lng_togoal, lat_togoal, lng_frompast, lat_frompast;
-  lng_togoal = ((goal_lng * 100.0) - (now_lng * 100.0)) * (91287.7885);
-  lat_togoal = ((goal_lat * 100.0) - (now_lat * 100.0)) * (110940.5844);
-  lng_frompast = ((now_lng * 100.0) - (past_lng * 100.0)) * (91287.7885);
-  lat_frompast = ((now_lat * 100.0) - (past_lat * 100.0)) * (110940.5844);
+  double lng_togoal = (goal_lng - now_lng) * (91287.7885);
+  double lat_togoal = (goal_lat - now_lat) * (110940.5844);
+  double lng_frompast = (now_lng - past_lng) * (91287.7885);
+  double lat_frompast = (now_lat - past_lat) * (110940.5844);
   double arctan_togoal;
   if(lng_togoal >= 0){
     arctan_togoal = atan(lat_togoal / lng_togoal);
@@ -212,8 +212,7 @@ double direction_differ(float now_lng, float now_lat,
   }else{
     arctan_frompast = atan(lat_frompast / lng_frompast) + M_PI;
   }
-  double rad;
-  rad = arctan_frompast - arctan_togoal;
+  double rad = arctan_frompast - arctan_togoal;
   if(rad > M_PI){
     rad = rad - (2 * M_PI);
   }else if(rad < (-1 * M_PI) ){
