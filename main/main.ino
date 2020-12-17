@@ -185,18 +185,18 @@ void servoLoop()
 
 float distance_togoal(float now_lng, float now_lat)
 {                
-   float lng_meter = abs((goal_lng * 100) - (now_lng * 100)) * (912.877885);
-   float lat_meter = abs((goal_lat * 100) - (now_lat * 100)) * (1109.405844);
+   float lng_meter = abs((goal_lng * 100.0) - (now_lng * 100.0)) * (912.877885);
+   float lat_meter = abs((goal_lat * 100.0) - (now_lat * 100.0)) * (1109.405844);
    return sqrt((lng_meter * lng_meter) + (lat_meter * lat_meter));            
 }
 
 double direction_differ(float now_lng, float now_lat,
                         float past_lng, float past_lat)
 {
-  double lng_togoal = ((goal_lng * 100) - (now_lng * 100)) * (91287.7885);
-  double lat_togoal = ((goal_lat * 100) - (now_lat * 100)) * (110940.5844);
-  double lng_frompast = ((now_lng * 100) - (past_lng * 100)) * (91287.7885);
-  double lat_frompast = ((now_lat * 100) - (past_lat * 100)) * (110940.5844);
+  double lng_togoal = ((goal_lng * 100.0) - (now_lng * 100.0)) * (91287.7885);
+  double lat_togoal = ((goal_lat * 100.0) - (now_lat * 100.0)) * (110940.5844);
+  double lng_frompast = ((now_lng * 100.0) - (past_lng * 100.0)) * (91287.7885);
+  double lat_frompast = ((now_lat * 100.0) - (past_lat * 100.0)) * (110940.5844);
   double arctan_togoal;
   if(lng_togoal >= 0){
     arctan_togoal = atan(lat_togoal / lng_togoal);
