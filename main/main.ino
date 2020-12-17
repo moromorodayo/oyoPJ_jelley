@@ -242,7 +242,7 @@ void GPSmode() {
     gps.encode(c);
     
     millis_gps_current = millis(); 
-    if (gps.location.isUpdated() and (millis_gps_current - millis_gps_previous) >= duration_gps){
+    if (gps.location.isUpdated()){
       //Serial.print("LAT="); Serial.println(gps.location.lat(), 6);
       //Serial.print("LONG="); Serial.println(gps.location.lng(), 6);
       //Serial.print("ALT="); Serial.println(gps.altitude.meters());
