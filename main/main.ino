@@ -285,6 +285,8 @@ void GPSmode() {
       past_lat = now_lat;
       past_lng = now_lng;
     }else{
+      servo1.writeMicroseconds(round(1500 - rotate_amount *  (rad * 100)));// decided by direction
+      servo2.writeMicroseconds(round(1500 - rotate_amount *  (rad * 100)));// decided by direction
       if (distance > 10){
         servo3.writeMicroseconds(round(1500 + 250));// decided by distance
       }else{
