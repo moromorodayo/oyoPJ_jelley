@@ -184,9 +184,10 @@ void servoLoop()
 }
 
 float distance_togoal(float now_lng, float now_lat)
-{                
-   float lng_meter = abs((goal_lng * 100.0) - (now_lng * 100.0)) * (912.877885);
-   float lat_meter = abs((goal_lat * 100.0) - (now_lat * 100.0)) * (1109.405844);
+{
+   float lng_meter, lat_meter;
+   lng_meter = abs((goal_lng * 100.0) - (now_lng * 100.0)) * (912.877885);
+   lat_meter = abs((goal_lat * 100.0) - (now_lat * 100.0)) * (1109.405844);
    return sqrt((lng_meter * lng_meter) + (lat_meter * lat_meter));            
 }
 
